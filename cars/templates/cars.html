@@ -1,19 +1,205 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>cars</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+  <style>
+    :root {
+      --primary-color: #00cfd5;
+      --secondary-color: #0066ff;
+      --dark-color: #0a0e17;
+      --light-color: #f0f8ff;
+      --accent-color: #ff4d7d;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    body {
+      background: linear-gradient(135deg, var(--dark-color), #1a1f2e);
+      color: var(--light-color);
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+    }
+    
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 0 auto;
+      max-width: 1400px;
+      padding: 30px;
+    }
+    
+    .car-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      text-align: center;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+    
+    .car-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      opacity: 0.8;
+    }
+    
+    .car-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 207, 213, 0.3);
+      cursor: pointer;
+    }
+    
+    .car-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+    
+    .car-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .car-card h2 {
+      font-size: 1.8rem;
+      margin: 15px 10px 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--light-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    
+    .car-card p {
+      font-size: 1.1rem;
+      margin: 8px 15px 20px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .car-card .price {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-top: 10px;
+    }
+    
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      padding: 50px;
+    }
+    
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px auto;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    
+    input[type="text"] {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      margin-right: 15px;
+      width: 70%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+    
+    input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    input[type="text"]:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 2px var(--primary-color);
+    }
+    
+    button[type="submit"] {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+    }
+    
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+    }
+    
+    @media (max-width: 768px) {
+      .car-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 15px;
+      }
+      
+      form {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      input[type="text"] {
+        width: 100%;
+        margin-right: 0;
+      }
+      
+      button[type="submit"] {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .car-card h2 {
+        font-size: 1.5rem;
+      }
+      
+      .car-card p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 
-  {% block content %}
-    <body>
-        <h3>CArro 1: {{ cars.model }}</h3>
-    </body>
-  {% endblock  %}
-  
-</body>
-</html>
+  <form method="GET" action="{% url 'cars_list' %}">
+    <input type="text" name="search" placeholder="🔍 Buscar carro por modelo, marca...">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div class="car-grid">
+    {% if cars %}
+      {% for car in cars %}
+        <div class="car-card">
+          <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+          <h2>{{ car.brand }} {{ car.model }}</h2>
+          <p>{{ car.factory_year }}</p>
+          <p class="price">R$ {{ car.value }}</p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="no-results">Nenhum carro encontrado. Tente outra busca.</p>
+    {% endif %}
+  </div>
+{% endblock %}
