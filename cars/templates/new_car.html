@@ -235,19 +235,5 @@
         <button type="submit" class="submit-btn">Cadastrar Veículo</button>
     </form>
 </div>
-<script>
-    // Mostrar nome do arquivo selecionado
-    document.querySelector('input[type="file"]').addEventListener('change', function(e) {
-        const fileName = e.target.files[0] ? e.target.files[0].name : 'Nenhum arquivo selecionado';
-        document.getElementById('file-name').textContent = fileName;
-    });
-
-    // Adicionar classes de estilo aos inputs
-    document.querySelectorAll('input:not([type="file"]), select, textarea').forEach(input => {
-        input.classList.add('form-input');
-    });
-</script>
-
-
 
 {% endblock %}

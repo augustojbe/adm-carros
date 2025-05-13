@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-title {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2rem;
+        background: linear-gradient(90deg, var(--primary-color), var(--light-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .form-control {
+        width: 95%;
+        padding: 12px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(0, 207, 213, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-submit {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        margin-top: 20px;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+    }
+
+    .error-message {
+        color: var(--accent-color);
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+
+    .help-text {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+    .div-center{
+      display: grid;
+      place-items: center;
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .form-container {
+            padding: 15px;
+            margin: 15px;
+            border-radius: 8px;
+        }
+
+        .form-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+
+        .btn-submit {
+            padding: 12px;
+            font-size: 14px;
+        }
+    }
+</style>
+
+<div class="form-container">
+    <h1 class="form-title">Faça o login</h1>
+    
+ <form method="post">
+        {% csrf_token %}
+          <div class="div-center">
+            <table>
+              {{login_form.as_table}}
+            </table>
+         </div>
+    <button type="submit" class="btn-submit">Entrar</button>
+  </form>
+
+</div>
+
+{% endblock %}

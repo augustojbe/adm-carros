@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
   <style>
     :root {
@@ -192,7 +193,11 @@
     {% if cars %}
       {% for car in cars %}
         <div class="car-card">
-          <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+          {% if car.photo %}
+            <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+          {% else %}
+            <img src="{% static 'images/sem-foto.jpg' %}" alt="Sem foto disponível">
+          {% endif %}
           <h2>{{ car.brand }} {{ car.model }}</h2>
           <p>{{ car.factory_year }}</p>
           <p class="price">R$ {{ car.value }}</p>
