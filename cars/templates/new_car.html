@@ -200,7 +200,7 @@
         {% csrf_token %}
         
         <table class="form-table">
-            {% for field in new_car_form %}
+            {% for field in form %}
             <tr>
                 <th>{{ field.label_tag }}</th>
                 <td>

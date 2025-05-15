@@ -150,6 +150,15 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
     }
+    a {
+      font-size: 18px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    a{
+      color: #0096c7 ;
+    }
     
     @media (max-width: 768px) {
       .car-grid {
@@ -192,16 +201,19 @@
   <div class="car-grid">
     {% if cars %}
       {% for car in cars %}
-        <div class="car-card">
-          {% if car.photo %}
+        <a href="{% url 'car_detail' car.pk %}">
+          <div class="car-card">
+           {% if car.photo %}
             <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
-          {% else %}
+            {% else %}
             <img src="{% static 'images/sem-foto.jpg' %}" alt="Sem foto disponível">
-          {% endif %}
-          <h2>{{ car.brand }} {{ car.model }}</h2>
-          <p>{{ car.factory_year }}</p>
-          <p class="price">R$ {{ car.value }}</p>
-        </div>
+            {% endif %}
+            <h2>{{ car.brand }} {{ car.model }}</h2>
+            <p>{{ car.factory_year }}</p>
+            <p class="price">R$ {{ car.value }}</p>
+          </div>
+        </a>
+    
       {% endfor %}
     {% else %}
       <p class="no-results">Nenhum carro encontrado. Tente outra busca.</p>

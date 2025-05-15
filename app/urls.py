@@ -2,14 +2,17 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from cars.views import car_viw, new_car_viw
+from cars.views import CarsListView, NewCarCreatView, CarDetailView
 from accounts.views import register_view, login_view, logout_view
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
-    path('cars/', car_viw, name='cars_list'),
-    path('new_car/', new_car_viw, name='new_car'),
+    path('cars/', CarsListView.as_view(), name='cars_list'),
+    path('', lambda request: redirect('cars/')),
+    path('new_car/', NewCarCreatView.as_view(), name='new_car'),
+    path('cars/<int:pk>/', CarDetailView.as_view(), name='car_detail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
