@@ -109,6 +109,26 @@
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
     }
+    .btn-danger {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+      text-decoration: none !important;
+    }
+    
+    .btn-danger:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+    }
     
     .btn-danger {
       background: linear-gradient(45deg, var(--accent-color), #ff2d62);
@@ -123,6 +143,16 @@
       color: var(--accent-color);
       font-size: 14px;
       margin-top: 5px;
+    }
+    .btn-divisor{
+      display: flex;
+      justify-content: center; 
+      gap: 50px;               
+      margin-top: 20px;
+    }
+    .btn-a{
+      text-decoration: none;
+      color: white ;
     }
     
     @media (max-width: 768px) {
@@ -173,7 +203,14 @@
     <p><strong>Ano do modelo:</strong> {{ object.model_year }}</p>
     <p><strong>Placa:</strong> {{ object.plate }}</p>
     <p><strong>Preço:</strong> R$ {{ object.value }}</p>
-
   </div>
-  </div>
+  {% if user.is_authenticated %}
+    <div class="btn-divisor">
+      <button type="submit" class="btn"><a href="{% url 'car_update' pk=object.pk %}" class="btn-a">Editar</a></button>
+      <button type="submit" class="btn-danger"><a href="{% url 'car_delete' pk=object.pk %}" class="btn-a">Deletar</a></button>
+    </div> 
+  {% endif %}
+  
+  
+  
 {% endblock %}

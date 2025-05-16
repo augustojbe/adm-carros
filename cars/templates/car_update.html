@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .form-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-title {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2rem;
+        background: linear-gradient(90deg, var(--primary-color), var(--light-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .form-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .form-table tr:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-table th, 
+    .form-table td {
+        padding: 15px 10px;
+        text-align: left;
+    }
+
+    .form-table th {
+        width: 30%;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        transition: var(--transition);
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(0, 207, 213, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .form-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .submit-btn {
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 30px auto 0;
+        padding: 14px;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+    }
+      .submit-btn-danger {
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 30px auto 0;
+        padding: 14px;
+        background: red;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+    }
+     .submit-btn-danger:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+    }
+
+    .file-input-wrapper {
+        position: relative;
+        overflow: hidden;
+       #display: inline-block;
+        width: 100%;
+    }
+
+    .file-input-button {
+        display: block;
+        padding: 12px;
+        background: rgba(0, 207, 213, 0.2);
+        color: var(--primary-color);
+        border: 1px dashed var(--primary-color);
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .file-input-button:hover {
+        background: rgba(0, 207, 213, 0.3);
+    }
+
+    .file-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .file-name {
+        margin-top: 8px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .form-table th, 
+        .form-table td {
+            display: block;
+            width: 95%;
+        }
+
+        .form-table th {
+            padding-bottom: 5px;
+        }
+
+        .form-table td {
+            padding-top: 5px;
+            padding-bottom: 15px;
+        }
+
+        .submit-btn {
+            max-width: 100%;
+        }
+    }
+    .btn-divisor{
+      display: flex;
+      justify-content: center; 
+      gap: 50px;               
+      margin-top: 20px;
+    }
+    .btn-a{
+      text-decoration: none;
+      color: white ;
+    }
+
+   @media (max-width: 480px) {
+        .form-container {
+            padding: 10px;
+            margin: 12px 12px;
+            border-radius: 6px;
+        }
+
+        .form-title {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            padding: 7px 10px;
+            font-size: 0.85rem;
+        }
+
+        .btn-submit {
+            padding: 9px;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        .file-input-button {
+            padding: 7px;
+            font-size: 0.8rem;
+        }
+
+        /* Garante que os inputs não ultrapassem a largura da tela */
+        input, select, textarea {
+            max-width: 95%;
+        }
+    }
+
+</style>
+
+<div class="form-container">
+    <h1 class="form-title">Editar Veículo</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <table class="form-table">
+            {% for field in form %}
+            <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>
+                    {% if field.name == 'photo' %}
+                        <div class="file-input-wrapper">
+                            <div class="file-input-button">
+                                <i class="fas fa-camera"></i> Selecionar Imagem
+                                {{ field }}
+                            </div>
+                            <div class="file-name" id="file-name">Nenhum arquivo selecionado</div>
+                        </div>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                    
+                    {% if field.errors %}
+                        <div class="error-message" style="color: var(--accent-color); font-size: 0.8rem; margin-top: 5px;">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                    
+                    {% if field.help_text %}
+                        <div class="help-text" style="color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; margin-top: 5px;">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+          <div class="btn-divisor">
+             <button type="submit" class="submit-btn">Salva Alterações</button>
+            <button type="submit" class="submit-btn-danger"><a href="{% url 'car_delete' pk=object.pk%}" class="btn-a">Deletar</a></button>
+            <button type="submit" class="submit-btn"><a href="{% url 'cars_list'%}" class="btn-a">Calcelar</a></button>
+        </div>
+    </form>
+   
+
+</div>
+
+{% endblock %}
