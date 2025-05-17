@@ -66,12 +66,16 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'carros',
+        'USER': 'docker',
+        'PASSWORD': 'docker',
+        'HOST': 'localhost', 
+        'PORT': '5432',    
+        'USE_TZ': True,
+        'TIME_ZONE': 'America/Fortaleza',  
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 

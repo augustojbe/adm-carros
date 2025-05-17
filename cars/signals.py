@@ -1,24 +1,32 @@
-from django.db.models.signals import pre_save, pre_delete, post_save, post_delete
+from django.db.models.signals import pre_save, post_save, post_delete
+from django.db.models import Sum
 from django.dispatch import receiver
-from cars.models import Car
+from cars.models import Car, InvetoryCar
+from gemini_ai.cliente import get_car_ai_bio
 
-
+def car_inventury_upate():
+  cars_count = Car.objects.all().count()
+  cars_value = Car.objects.aggregate(
+    total_value  = Sum('value')
+  )['total_value']
+  InvetoryCar.objects.create(
+    cars_count=cars_count,
+    cars_value=cars_value
+  )
 @receiver(pre_save, sender=Car)
 def car_pre_save(sender, instance, **kwargs):
-  print('### - Pre save - ###')
-  print(instance)
+  if not instance.bio:
+    ai_bio = get_car_ai_bio(
+      instance.model, instance.brand, instance.model_year
+    )
+    instance.bio = ai_bio
+  
 
 @receiver(post_save, sender=Car)
 def car_pre_save(sender, instance, **kwargs):
-  print('### - Post save - ###')
-  print(instance)
-  
-@receiver(pre_delete, sender=Car)
-def car_pre_save(sender, instance, **kwargs):
-  print('### - Pre delete - ###')
-  print(instance)
+  car_inventury_upate()
 
 @receiver(post_delete, sender=Car)
-def car_pre_save(sender, instance, **kwargs):
-  print('### - Post delete - ###')
-  print(instance)
+def car_post_delete(sender, instance, **kwargs):
+  car_inventury_upate()
+
