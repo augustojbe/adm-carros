@@ -38,18 +38,8 @@ Sistema de gerenciamento de veículos reescrito em Python 3.13.3 com interface m
 
 ## 🗃️ Estrutura do Projeto
 
-adm-carros-python/
-├── src/
-│   ├── models/          # Classes de domínio
-│   ├── views/           # Interface gráfica
-│   ├── controllers/     # Lógica de negócio
-│   ├── database/        # Configuração do banco
-│   ├── utils/           # Helpers e validadores
-│   └── main_window.py   # Ponto de entrada
-├── tests/               # Testes unitários
-├── requirements.txt     # Dependências
-├── pyproject.toml       # Configuração Poetry
-└── README.md
+![image](https://github.com/user-attachments/assets/44500b1f-4fce-4ceb-b849-96e28a4f66cf)
+
 
 ## 🤝 Como Contribuir
  - Faça um fork do projeto
