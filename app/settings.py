@@ -68,7 +68,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'carros',
-        'USER': 'docker',
+        'USER': 'postgres',
         'PASSWORD': 'docker',
         'HOST': 'localhost', 
         'PORT': '5432',    
